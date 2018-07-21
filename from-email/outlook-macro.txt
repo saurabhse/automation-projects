@@ -1,0 +1,39 @@
+Sub getemailaddress()
+Dim outlookApp as Outlook.Application, oOutlook As Object
+Dim oInbox As Outlook.Folder, oMail As Outlook.mailItem, i
+Dim wmp, module
+Dim strAddress As String, getSmtpMailAddress
+Dim olEU As Outlook.Exchangeuser
+Dim oEDL As Outlook.ExchangeDistributionList
+Dim recip As outlook.Recipient
+
+On Error Resume Next
+
+Set outlookApp = New Outlook.Application
+Set oOutlook = outlookApp.GetNameSpace("MAPI")
+Set oInbox = oOutlook.GetDefaultFolder(oFolderInbox).Folders("myFolder")  // myFolder should be created in Outlook
+i = 1
+For Each oMail In oInbox.Items.restrict("[UnRead] = True")
+      If inStr(1,oMail.Subject, "Run",vbTextCompare) = 1 Then // Subject line should have Run
+          if oMail.SenderEmailType = "SMTP" Then
+                strAddress = oMail.SenderEmailAddress
+          Else
+              Set recip = Application.Session.CreateRecipient(oMail.SenderEmailAddres)
+              set olEU = recip.AddressEntry.GetExchangeUser
+              strAddress = olEU.PrimarySmtpAddress
+          End If
+          
+          getSmtpMailAddress = strAddress
+          module = Trim(Mid(oMail.Subject,4))
+          
+          Debug.Print i & " :" & module & " :" getSmtpMailAddress & " :" & oMail.ReceivedTime & " : " & oMail.SenderName
+          i = i+1
+          
+          Set wmp = CreateObject("Wscript.shell")
+          wmp.Run "cmd /C C:\Automation\trigger.bat " & module & " " & getSmtpMailAddress & " " & oMail.ReceivedTime & " " & oMail.SenderName & ""
+          
+          oMail.Unread = False
+      End If
+Next
+
+End Sub
