@@ -1,0 +1,13 @@
+<?xml version="1.0"  encoding"utf-8"?>
+<ConfigInfo>
+  <Env name="Local">
+      <gitPath>git_installation_path/#{USER_ID}</
+      <wsLoc>build_folder_path</wsLoc>
+      <buildPath>build_folder_path</buildPath>
+      <deployPath>deploy_folder_path</deployPath>
+      <branchName>git_branch_name</branchName>
+      <excludeFolders>
+          <folderName>folder_name_to_be_excluded</folderName>
+          <folderName>folder_name_to_be_excluded</folderName>
+      </excludeFolders>
+  </Env>
