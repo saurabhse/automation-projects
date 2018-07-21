@@ -1,7 +1,7 @@
 <?xml version="1.0"  encoding"utf-8"?>
 <ConfigInfo>
   <Env name="Local">
-      <gitPath>git_installation_path/#{USER_ID}</
+    <gitPath>git_installation_path/#{USER_ID}</gitPath>
       <wsLoc>build_folder_path</wsLoc>
       <buildPath>build_folder_path</buildPath>
       <deployPath>deploy_folder_path</deployPath>
