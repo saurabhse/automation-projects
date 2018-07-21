@@ -1,6 +1,7 @@
  * Create a folder
  * Copy build_initial.ps1, build_config.xml, build.ps1
  * Create two folders build and deploy
+ * build folder will have scripts folder inside which all scripts reside
  
  
  # Intial Build : #
