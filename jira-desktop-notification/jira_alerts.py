@@ -55,7 +55,7 @@ def notify(title, msg,obj):
 
 with open('config.json', 'r') as f:
     config = json.load(f)
-options = {'server': 'https://jira.kindredgroup.com'}
+options = {'server': ''}
 jira = JIRA(options, basic_auth=(config['JIRA']['USER_NAME'], config['JIRA']['PASSWORD']))
 ticket_list = []
 obj = notification_window('hello', 'world')
@@ -63,7 +63,7 @@ now = datetime.datetime.now()
 today6pm = now.replace(hour=18, minute=0, second=0, microsecond=0)
 
 while now < today6pm if config['PARAMS']['SHUTDOWN'] else True:
-    issue_list = jira.search_issues('filter=19578')
+    issue_list = jira.search_issues('')
     issues=[]
     new_tickets=[]
     for issue in issue_list:
